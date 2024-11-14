@@ -15,4 +15,4 @@ def cart_totals(carrinho):
             for item
             in carrinho.values()
         ]
-    ) 
+    )
