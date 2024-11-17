@@ -1,6 +1,5 @@
-from flask import Flask, jsonify
-from flask import Blueprint
-from flask import render_template
+from flask import Flask, jsonify, Blueprint, render_template
+import os
 
 loja_blueprint = Blueprint('loja', __name__)
 pedido_blueprint = Blueprint('pedido', __name__)
@@ -25,7 +24,7 @@ def perfil():
 
 app = Flask(__name__)
 
-app.config['DEBUG'] = True 
+app.config['DEBUG'] = False 
 
 app.register_blueprint(loja_blueprint, url_prefix='/loja')
 app.register_blueprint(pedido_blueprint, url_prefix='/pedido')
@@ -37,4 +36,5 @@ def home():
     return jsonify({"message": "Bem vindo à API do e-commerce!"})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
