@@ -1,5 +1,11 @@
 from flask import Flask, jsonify
-from loja import loja_blueprint
+from flask import Blueprint
+
+loja_blueprint = Blueprint('loja', __name__)
+
+@loja_blueprint.route(/)
+def index():
+    return "Página inicial da loja"
 
 app = Flask(__name__)
 
