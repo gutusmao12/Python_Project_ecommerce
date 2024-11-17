@@ -3,7 +3,7 @@ from flask import Blueprint
 
 loja_blueprint = Blueprint('loja', __name__)
 
-@loja_blueprint.route(/)
+@loja_blueprint.route('/')
 def index():
     return "Página inicial da loja"
 
