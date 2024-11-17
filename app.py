@@ -11,7 +11,10 @@ app = Flask(__name__)
 
 app.config['DEBUG'] = True 
 
-app.register_blueprint(loja_blueprint)
+app.register_blueprint(loja_blueprint, url_prefix='/loja')
+app.register_blueprint(pedido_blueprint, url_prefix='/pedido')
+app.register_blueprint(produto_blueprint, url_prefix='/produto')
+app.register_blueprint(perfil_blueprint, url_prefix='/perfil')
 
 @app.route('/')
 def home():
