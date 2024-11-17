@@ -1,5 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask import Blueprint
+from flask import render_template
 
 loja_blueprint = Blueprint('loja', __name__)
 pedido_blueprint = Blueprint('pedido', __name__)
@@ -8,19 +9,19 @@ perfil_blueprint = Blueprint('perfil', __name__)
 
 @loja_blueprint.route('/')
 def loja():
-    return jsonify({"message": "Página da Loja"})
+     return render_template('loja.html')
 
 @pedido_blueprint.route('/')
 def pedido():
-    return jsonify({"message": "Página de Pedidos"})
+     return render_template('pedido.html')
 
 @produto_blueprint.route('/')
 def produto():
-    return jsonify({"message": "Página de Produtos"})
+     return render_template('produto.html')
 
 @perfil_blueprint.route('/')
 def perfil():
-    return jsonify({"message": "Página de Perfil"})
+     return render_template('perfil.html')
 
 app = Flask(__name__)
 
