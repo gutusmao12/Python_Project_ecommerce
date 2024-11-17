@@ -4,6 +4,44 @@
 <head>
     {% include 'parciais/_head.html' %}
     <title>{% block titulo %}{% endblock %}E-commerce</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Inclua aqui os estilos de acessibilidade */
+        .accessibility-menu {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .accessibility-options {
+            display: none;
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .accessibility-options button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 5px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .accessibility-options button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,6 +51,58 @@
         {% include 'parciais/_messages.html' %}
         {% block conteudo %}{% endblock %}
     </main>
+    <!-- Botão de Acessibilidade -->
+    <div class="accessibility-menu">
+        <i class="fas fa-wheelchair"></i>
+    </div>
+
+    <!-- Menu de opções de acessibilidade -->
+    <div class="accessibility-options">
+        <button onclick="adjustFontSize('increase')">Aumentar Fonte</button>
+        <button onclick="adjustFontSize('decrease')">Diminuir Fonte</button>
+        <button onclick="toggleContrast()">Alternar Contraste</button>
+    </div>
+
+    <script>
+        // Alterna a visibilidade do menu de opções de acessibilidade
+        const accessibilityMenu = document.querySelector('.accessibility-menu');
+        const accessibilityOptions = document.querySelector('.accessibility-options');
+
+        accessibilityMenu.addEventListener('click', () => {
+            accessibilityOptions.style.display = 
+                accessibilityOptions.style.display === 'none' || accessibilityOptions.style.display === '' 
+                ? 'block' 
+                : 'none';
+        });
+
+        // Função para aumentar ou diminuir o tamanho da fonte
+        function adjustFontSize(action) {
+            const body = document.body;
+            const currentSize = window.getComputedStyle(body).fontSize;
+
+            if (action === 'increase') {
+                body.style.fontSize = (parseInt(currentSize) + 2) + 'px';
+            } else if (action === 'decrease') {
+                body.style.fontSize = (parseInt(currentSize) - 2) + 'px';
+            }
+        }
+
+        // Função para alternar o contraste
+        function toggleContrast() {
+            const body = document.body;
+            body.classList.toggle('high-contrast');
+        }
+
+        // Adiciona o estilo de contraste alto
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .high-contrast {
+                background-color: #000;
+                color: #FFF;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 
     {% include 'parciais/_footer.html' %}
 
